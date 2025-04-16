@@ -17,7 +17,7 @@ function DashboardPage() {
   }, []);
 
   return (
-    <section>
+    <section className="container">
       <article>
         <h2 className="text-xl mb-4">Dashboard</h2>
         <article>

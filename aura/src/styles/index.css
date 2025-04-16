@@ -4,6 +4,14 @@
 @tailwind utilities; */
 
 /* Estilos personalizados */
+@layer components {
+  .container {
+    max-width: 1200px;
+    width: 88% !important;
+    margin: 0 auto;
+  }
+}
+
 /* @layer base {
   body {
     @apply bg-gray-50;
