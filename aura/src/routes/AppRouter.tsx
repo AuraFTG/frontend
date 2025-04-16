@@ -5,51 +5,40 @@ import PrivateRoute from "./PrivateRoute";
 
 // Layouts
 import MainLayout from "../layouts/MainLayout";
-import AuthLayout from "../layouts/AuthLayout";
+// import AuthLayout from "../layouts/AuthLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
 
 // Pages
 import LoginPage from "../pages/auth/LoginPage";
 import RegisterPage from "../pages/auth/RegisterPage";
 import DashboardPage from "../pages/dashboard/DashboardPage";
-// import EmployeesListPage from "../pages/employees/EmployeesListPage";
-// import EmployeeDetailPage from "../pages/employees/EmployeeDetailPage";
-// import PaymentsPage from "../pages/payments/PaymentsPage";
 
+// routes/AppRouter.tsx
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Rutas públicas con AuthLayout */}
-        <Route element={<AuthLayout />}>
+        <Route element={<MainLayout />}>
+          {" "}
+          {/* MainLayout contiene Header y Footer */}
+          {/* Rutas públicas */}
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
-        </Route>
-
-        {/* Rutas privadas con MainLayout */}
-        <Route element={<MainLayout />}>
+          {/* Rutas privadas */}
           <Route element={<PrivateRoute />}>
-            {/* Home redirige al dashboard */}
             <Route
               path={ROUTES.HOME}
               element={<Navigate to={ROUTES.DASHBOARD} />}
             />
 
-            {/* Rutas del dashboard */}
             <Route element={<DashboardLayout />}>
               <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
-              {/* <Route path={ROUTES.EMPLOYEES} element={<EmployeesListPage />} /> */}
-              {/* <Route
-                path={ROUTES.EMPLOYEE_DETAIL}
-                element={<EmployeeDetailPage />}
-              /> */}
-              {/* <Route path={ROUTES.PAYMENTS} element={<PaymentsPage />} /> */}
+              {/* otras rutas privadas */}
             </Route>
           </Route>
+          {/* Ruta para "not found" */}
+          <Route path="*" element={<Navigate to={ROUTES.HOME} />} />
         </Route>
-
-        {/* Ruta para "not found" */}
-        <Route path="*" element={<Navigate to={ROUTES.LOGIN} />} />
       </Routes>
     </BrowserRouter>
   );

@@ -5,6 +5,7 @@ export const fetchWithOpts = async <T>(
   opts?: RequestInit
 ): Promise<FetchResult<T>> => {
   let result: FetchResult<T>;
+
   try {
     const response = await fetch(url, opts);
 
