@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
+import { RegisterProps } from "../../types/types";
 
-interface RegisterProps {
-  onSubmit?: (name: string, email: string, password: string) => void;
-}
-
-const RegisterForm: React.FC<RegisterProps> = ({ onSubmit }) => {
+const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

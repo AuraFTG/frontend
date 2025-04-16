@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
+import { LoginFormProps } from "../../types/types";
 
-interface LoginFormProps {
-  onSubmit?: (email: string, password: string) => void;
-}
-
-const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(

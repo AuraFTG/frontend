@@ -1,24 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchWithOpts } from "../../hooks/useFetch";
-
-export interface User {
-  gender: string;
-  name: {
-    title: string;
-    first: string;
-    last: string;
-  };
-  email: string;
-  login: {
-    uuid: string;
-  };
-  picture: {
-    thumbnail: string;
-  };
-  location: {
-    country: string;
-  };
-}
+import { User } from "../../types/types";
 
 function DashboardPage() {
   const url = "https://randomuser.me/api/?results=10";
