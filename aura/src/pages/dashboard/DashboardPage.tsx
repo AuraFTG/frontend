@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchWithOpts } from "../../hooks/useFetch";
+<<<<<<< HEAD
 import { MdDelete } from "react-icons/md";
 
 
@@ -18,14 +19,25 @@ interface User {
 
 const DashboardPage = () => {
   const url = "./user.json";
+=======
+import { User } from "../../types/types";
+
+function DashboardPage() {
+  const url = "https://randomuser.me/api/?results=10";
+>>>>>>> 8c2e4baf5c645aa773febca670c62bdb2bbb4cd0
   const [response, setResponse] = useState<User[] | null>(null);
 
   useEffect(() => {
     const handleResponse = async () => {
       const result = await fetchWithOpts(url);
       const arrData = result.data;
+<<<<<<< HEAD
       console.log(arrData);
       setResponse(arrData as User[]);
+=======
+      // console.log(arrData.results);
+      setResponse(arrData.results as User[]);
+>>>>>>> 8c2e4baf5c645aa773febca670c62bdb2bbb4cd0
     };
 
     handleResponse();
@@ -51,9 +63,22 @@ const DashboardPage = () => {
                 </thead>
                 <tbody>
                   {response.map((user) => (
+<<<<<<< HEAD
                     <tr key={user.id} className="hover:bg-gray-50">
                       <td className="py-3 px-4 border-b">
                         <p> {user.id}</p>
+=======
+                    <tr
+                      key={user.login.uuid}
+                      className="even:bg-gray-200 odd:bg-white hover:bg-gray-50"
+                    >
+                      <td className="py-3 px-4 border-b">
+                        <img
+                          src={user.picture.thumbnail}
+                          alt={`${user.name.first} ${user.name.last}`}
+                          className="w-10 h-10 rounded-full object-cover"
+                        />
+>>>>>>> 8c2e4baf5c645aa773febca670c62bdb2bbb4cd0
                       </td>
                       <td className="py-3 px-4 border-b">{user.name}</td>
                       <td className="py-3 px-4 border-b">{user.email}</td>
@@ -84,6 +109,7 @@ const DashboardPage = () => {
 }
 
 export default DashboardPage;
+<<<<<<< HEAD
 
 
 
@@ -105,3 +131,5 @@ interface DashboardPageProps{
 //     />
 //   </li>
 // </ul>
+=======
+>>>>>>> 8c2e4baf5c645aa773febca670c62bdb2bbb4cd0
