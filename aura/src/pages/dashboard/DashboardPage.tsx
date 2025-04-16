@@ -1,16 +1,35 @@
 import { useEffect, useState } from "react";
 import { fetchWithOpts } from "../../hooks/useFetch";
 
+export interface User {
+  gender: string;
+  name: {
+    title: string;
+    first: string;
+    last: string;
+  };
+  email: string;
+  login: {
+    uuid: string;
+  };
+  picture: {
+    thumbnail: string;
+  };
+  location: {
+    country: string;
+  };
+}
+
 function DashboardPage() {
   const url = "https://randomuser.me/api/?results=10";
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState<User[] | null>(null);
 
   useEffect(() => {
     const handleResponse = async () => {
       const result = await fetchWithOpts(url);
       const arrData = result.data;
-      console.log(arrData.results);
-      setResponse(arrData.results);
+      // console.log(arrData.results);
+      setResponse(arrData.results as User[]);
     };
 
     handleResponse();
@@ -42,7 +61,7 @@ function DashboardPage() {
                       <td className="py-3 px-4 border-b">
                         <img
                           src={user.picture.thumbnail}
-                          alt={`${user.nombre} ${user.apellido}`}
+                          alt={`${user.name.first} ${user.name.last}`}
                           className="w-10 h-10 rounded-full object-cover"
                         />
                       </td>

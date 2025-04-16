@@ -1,4 +1,8 @@
-export interface FetchResult<T> {
+import { User } from "../pages/dashboard/DashboardPage";
+
+export interface FetchResult {
   status: "ok" | "error";
-  data: T | Error;
+  data: {
+    results: User[];
+  };
 }
