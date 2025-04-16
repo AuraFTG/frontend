@@ -1,0 +1,18 @@
+@import "tailwindcss";
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+/* Tus estilos personalizados pueden ir aquí */
+/* @layer base {
+  body {
+    @apply bg-gray-50;
+  }
+} */
+
+/* @layer components {
+  Ejemplo de una clase personalizada
+  .btn-primary {
+    @apply bg-primary text-white py-2 px-4 rounded hover:bg-opacity-90 transition-colors;
+  }
+} */
