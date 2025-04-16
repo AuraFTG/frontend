@@ -25,6 +25,9 @@ function Header() {
           <li>
             <Link to="/auth/register">Registro</Link>
           </li>
+          <li>
+            <Link to="/users">Usuarios</Link>
+          </li>
         </ul>
       </nav>
     </header>

@@ -16,7 +16,7 @@ interface User {
   // Por ejemplo: location, picture, etc.
 }
 
-const DashboardPage = () => {
+const UserList = () => {
   const url = "./user.json";
   const [response, setResponse] = useState<User[] | null>(null);
 
@@ -34,7 +34,7 @@ const DashboardPage = () => {
   return (
     <section className="container">
       <article>
-        <h2 className="text-xl mb-4">Dashboard</h2>
+        <h2 className="text-xl mb-4">UsersList</h2>
         <article>
           {/* {response && JSON.stringify(response)} */}
           {response != null && (
@@ -83,25 +83,4 @@ const DashboardPage = () => {
   );
 }
 
-export default DashboardPage;
-
-
-
-interface DashboardPageProps{
-  
-
-}
-// <ul>
-//   <li
-//     key={item.login.uuid}
-//     className="flex items-center gap-2 mb-3"
-//   >
-//     <p>{item.name.first}</p>
-//     <p>{item.name.last}</p>
-//     <img
-//       src={item.picture.thumbnail}
-//       alt=""
-//       className="rounded-full"
-//     />
-//   </li>
-// </ul>
+export default UserList;

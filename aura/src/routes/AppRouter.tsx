@@ -12,6 +12,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import LoginPage from "../pages/auth/LoginPage";
 import RegisterPage from "../pages/auth/RegisterPage";
 import DashboardPage from "../pages/dashboard/DashboardPage";
+import UserList from "../pages/dashboard/UserList";
 
 // routes/AppRouter.tsx
 const AppRouter = () => {
@@ -24,6 +25,8 @@ const AppRouter = () => {
           {/* Rutas públicas */}
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+          <Route path={ROUTES.USERS} element={<UserList />} />
+
           {/* Rutas privadas */}
           <Route element={<PrivateRoute />}>
             <Route
