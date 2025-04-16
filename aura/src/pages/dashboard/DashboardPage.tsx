@@ -35,7 +35,10 @@ function DashboardPage() {
                 </thead>
                 <tbody>
                   {response.map((user) => (
-                    <tr key={user.login.uuid} className="hover:bg-gray-50">
+                    <tr
+                      key={user.login.uuid}
+                      className="even:bg-gray-200 odd:bg-white hover:bg-gray-50"
+                    >
                       <td className="py-3 px-4 border-b">
                         <img
                           src={user.picture.thumbnail}
@@ -61,18 +64,3 @@ function DashboardPage() {
 }
 
 export default DashboardPage;
-
-// <ul>
-//   <li
-//     key={item.login.uuid}
-//     className="flex items-center gap-2 mb-3"
-//   >
-//     <p>{item.name.first}</p>
-//     <p>{item.name.last}</p>
-//     <img
-//       src={item.picture.thumbnail}
-//       alt=""
-//       className="rounded-full"
-//     />
-//   </li>
-// </ul>
