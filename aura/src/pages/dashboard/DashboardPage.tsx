@@ -7,6 +7,9 @@ import usersData from "../../../public/user.json";
 function DashboardPage() {
   const [response, setResponse] = useState<User[]>(usersData);
 
+  const handleChange = (e: string) => {
+    console.log(e);
+  };
   // const url = "/user.json";
   // const [response, setResponse] = useState<User[] | null>(null);
 
@@ -50,9 +53,11 @@ function DashboardPage() {
                       <td className="py-3 px-4 border-b">
                         <select
                           value={user.role}
-                          name=""
-                          id=""
+                          name="user-role"
+                          id={`user-role-${user.id}`}
                           className="cursor-pointer"
+                          aria-label="Seleccionar rol de tu usuario"
+                          onChange={(e) => handleChange(e.target.value)}
                         >
                           <option value="Profesional">Profesional</option>
                           <option value="Secretaria">Secretaria</option>
