@@ -1,0 +1,17 @@
+[
+    {"id": 1, "name": "Alice Johnson", "email": "alice.johnson@example.com", "role": "Administrador"},
+    {"id": 2, "name": "Bob Smith", "email": "bob.smith@example.com", "role": "Profesional"},
+    {"id": 3, "name": "Carla Diaz", "email": "carla.diaz@example.com", "role": "Secretaria"},
+    {"id": 4, "name": "David Lee", "email": "david.lee@example.com", "role": "Profesional"},
+    {"id": 5, "name": "Eva Gomez", "email": "eva.gomez@example.com", "role": "Secretaria"},
+    {"id": 6, "name": "Frank Wright", "email": "frank.wright@example.com", "role": "Profesional"},
+    {"id": 7, "name": "Grace Liu", "email": "grace.liu@example.com", "role": "Administrador"},
+    {"id": 8, "name": "Hank Thompson", "email": "hank.thompson@example.com", "role": "Profesional"},
+    {"id": 9, "name": "Irene Novak", "email": "irene.novak@example.com", "role": "Secretaria"},
+    {"id": 10, "name": "Jack Wilson", "email": "jack.wilson@example.com", "role": "Profesional"},
+    {"id": 11, "name": "Karen Lopez", "email": "karen.lopez@example.com", "role": "Secretaria"},
+    {"id": 12, "name": "Leo Martínez", "email": "leo.martinez@example.com", "role": "Profesional"},
+    {"id": 13, "name": "Maria Fernandes", "email": "maria.fernandes@example.com", "role": "Secretaria"},
+    {"id": 14, "name": "Nina Rossi", "email": "nina.rossi@example.com", "role": "Administrador"},
+    {"id": 15, "name": "Oscar Brown", "email": "oscar.brown@example.com", "role": "Profesional"}
+  ]
