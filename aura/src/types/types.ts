@@ -1,20 +1,8 @@
 export interface User {
-  gender: string;
-  name: {
-    title: string;
-    first: string;
-    last: string;
-  };
+  id: number;
+  name: string;
   email: string;
-  login: {
-    uuid: string;
-  };
-  picture: {
-    thumbnail: string;
-  };
-  location: {
-    country: string;
-  };
+  role: string;
 }
 
 export interface FetchResult {

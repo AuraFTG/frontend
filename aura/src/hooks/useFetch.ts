@@ -1,10 +1,10 @@
 import { FetchResult } from "../types/types";
 
-export const fetchWithOpts = async <T>(
+export const fetchWithOpts = async (
   url: string,
   opts?: RequestInit
-): Promise<FetchResult<T>> => {
-  let result: FetchResult<T>;
+): Promise<FetchResult> => {
+  let result: FetchResult;
 
   try {
     const response = await fetch(url, opts);
