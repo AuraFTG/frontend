@@ -35,7 +35,7 @@ const UserList = () => {
                     <th className="py-3 px-4 border-b text-left">id</th>
                     <th className="py-3 px-4 border-b text-left">Nombre</th>
                     <th className="py-3 px-4 border-b text-left">Correo</th>
-                    <th className="py-3 px-4 border-b text-left">Roll</th>
+                    <th className="py-3 px-4 border-b text-left">Rol</th>
                     <th className="py-3 px-4 border-b text-left">Acciones</th>
                   </tr>
                 </thead>
@@ -64,7 +64,6 @@ const UserList = () => {
                           <MdDelete style={{ width: "2rem", height: "2rem" }} />
                         </button>
                       </td>
-                      <td className="py-3 px-4 border-b"></td>
                     </tr>
                   ))}
                 </tbody>

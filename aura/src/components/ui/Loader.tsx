@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-
-type LoaderProps = {
-  size?: "small" | "medium" | "large";
-  color?: "primary" | "secondary" | "success" | "danger" | "warning";
-  text?: string;
-  fullScreen?: boolean;
-};
+import { LoaderProps } from "../../types/types";
 
 export default function Loader({
   size = "medium",

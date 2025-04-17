@@ -19,3 +19,10 @@ export interface LoginFormProps {
 export interface RegisterProps {
   onSubmit?: (name: string, email: string, password: string) => void;
 }
+
+export type LoaderProps = {
+  size?: "small" | "medium" | "large";
+  color?: "primary" | "secondary" | "success" | "danger" | "warning";
+  text?: string;
+  fullScreen?: boolean;
+};
