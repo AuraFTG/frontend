@@ -18,6 +18,8 @@ export type OnSubmitHandler = (
   password: string
 ) => void;
 
+export type OnSubmitHandlerLogin = (email: string, password: string) => void;
+
 export interface LoginFormProps {
   onSubmit?: (email: string, password: string) => void;
 }

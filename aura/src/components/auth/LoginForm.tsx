@@ -1,55 +1,18 @@
-import React, { FC, useState } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { LoginFormProps } from "../../types/types";
+import useLoginForm from "../../hooks/auth/useLoginForm";
 
 const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>(
-    {}
-  );
-  const [isLoading, setIsLoading] = useState(false);
-
-  const validateForm = (): boolean => {
-    const newErrors: { email?: string; password?: string } = {};
-
-    if (!email) {
-      newErrors.email = "El email es requerido";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Email inválido";
-    }
-
-    if (!password) {
-      newErrors.password = "La contraseña es requerida";
-    } else if (password.length < 6) {
-      newErrors.password = "La contraseña debe tener al menos 6 caracteres";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      setIsLoading(true);
-
-      try {
-        // Aquí iría la llamada a tu API de autenticación
-        // Por ahora, simulamos un delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        if (onSubmit) {
-          onSubmit(email, password);
-        }
-      } catch (error) {
-        console.error("Error al iniciar sesión:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-  };
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    errors,
+    isLoading,
+    handleSubmit,
+  } = useLoginForm(onSubmit);
 
   return (
     <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
