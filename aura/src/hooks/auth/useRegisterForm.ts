@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { OnSubmitHandler } from "../../types/types";
+import { useNavigate } from "react-router-dom";
 
 const useRegisterForm = (onSubmit?: OnSubmitHandler) => {
   const [name, setName] = useState("");
@@ -13,6 +14,7 @@ const useRegisterForm = (onSubmit?: OnSubmitHandler) => {
     confirmPassword?: string;
   }>({});
   const [isLoading, setIsLoading] = useState(false);
+const navigate = useNavigate();
 
   const validateForm = (): boolean => {
     const newErrors: {
@@ -48,7 +50,7 @@ const useRegisterForm = (onSubmit?: OnSubmitHandler) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+ navigate("/auth/login");
     if (validateForm()) {
       setIsLoading(true);
 

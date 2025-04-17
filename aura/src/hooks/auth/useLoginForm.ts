@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { OnSubmitHandlerLogin } from "../../types/types";
+import { useNavigate } from "react-router-dom";
 
 const useLoginForm = (onSubmit?: OnSubmitHandlerLogin) => {
   const [email, setEmail] = useState("");
@@ -7,6 +8,7 @@ const useLoginForm = (onSubmit?: OnSubmitHandlerLogin) => {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {}
   );
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const validateForm = (): boolean => {
@@ -30,7 +32,7 @@ const useLoginForm = (onSubmit?: OnSubmitHandlerLogin) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    navigate("/");
     if (validateForm()) {
       setIsLoading(true);
 
