@@ -12,6 +12,12 @@ export interface FetchResult {
   };
 }
 
+export type OnSubmitHandler = (
+  name: string,
+  email: string,
+  password: string
+) => void;
+
 export interface LoginFormProps {
   onSubmit?: (email: string, password: string) => void;
 }
