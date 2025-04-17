@@ -13,6 +13,7 @@ import LoginPage from "../pages/auth/LoginPage";
 import RegisterPage from "../pages/auth/RegisterPage";
 import DashboardPage from "../pages/dashboard/DashboardPage";
 import UserList from "../pages/dashboard/UserList";
+import NotFound from "../components/ui/NotFound";
 
 // routes/AppRouter.tsx
 const AppRouter = () => {
@@ -39,7 +40,8 @@ const AppRouter = () => {
             </Route>
           </Route>
           {/* Ruta para "not found" */}
-          <Route path="*" element={<Navigate to={ROUTES.HOME} />} />
+          {/* <Route path="*" element={<Navigate to={ROUTES.HOME} />} /> */}
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
