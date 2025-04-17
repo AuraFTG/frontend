@@ -17,7 +17,7 @@ import UserList from "../pages/dashboard/UserList";
 // routes/AppRouter.tsx
 const AppRouter = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/frontend">
       <Routes>
         <Route element={<MainLayout />}>
           {" "}
@@ -26,7 +26,6 @@ const AppRouter = () => {
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
           <Route path={ROUTES.USERS} element={<UserList />} />
-
           {/* Rutas privadas */}
           <Route element={<PrivateRoute />}>
             <Route
