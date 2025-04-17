@@ -17,7 +17,7 @@ function Header() {
       <nav className="text-xl font-semibold">
         <ul className="flex gap-4 justify-between [&>li]:hover:underline">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/frontend">Home</Link>
           </li>
           <li>
             <Link to="/auth/login">Login</Link>

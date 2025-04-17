@@ -48,14 +48,19 @@ const UserList = () => {
                       <td className="py-3 px-4 border-b">{user.name}</td>
                       <td className="py-3 px-4 border-b">{user.email}</td>
                       <td className="py-3 px-4 border-b">
-                        <select value={user.role} name="" id="">
+                        <select
+                          value={user.role}
+                          name=""
+                          id=""
+                          className="cursor-pointer"
+                        >
                           <option value="Profesional">Profesional</option>
                           <option value="Secretaria">Secretaria</option>
                           <option value="admin">Admin</option>
                         </select>
                       </td>
                       <td className="py-3 px-4 border-b">
-                        <button type="button">
+                        <button type="button" className="cursor-pointer">
                           <MdDelete style={{ width: "2rem", height: "2rem" }} />
                         </button>
                       </td>
