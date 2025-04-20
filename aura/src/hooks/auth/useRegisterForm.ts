@@ -1,85 +1,76 @@
+// hooks/auth/useRegisterForm.ts
 import { useState } from "react";
+import { registerUser, RegisterPayload } from "../api/api";
 import { OnSubmitHandler } from "../../types/types";
 
+interface FormErrors extends Partial<RegisterPayload> {
+  confirmPassword?: string;
+}
+
 const useRegisterForm = (onSubmit?: OnSubmitHandler) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState<RegisterPayload>({
+    email: "",
+    password: "",
+    dni: "",
+    name: "",
+    lastName: "",
+    phoneNumber: "",
+    country: "",
+    photoUrl: "",
+    birthDate: "",
+    licenseNumber: "",
+    specialty: "",
+  });
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState<{
-    name?: string;
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
-  }>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
 
   const validateForm = (): boolean => {
-    const newErrors: {
-      name?: string;
-      email?: string;
-      password?: string;
-      confirmPassword?: string;
-    } = {};
-
-    if (!name.trim()) {
-      newErrors.name = "El nombre es requerido";
-    }
-
-    if (!email) {
-      newErrors.email = "El email es requerido";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Email inválido";
-    }
-
-    if (!password) {
-      newErrors.password = "La contraseña es requerida";
-    } else if (password.length < 6) {
-      newErrors.password = "La contraseña debe tener al menos 6 caracteres";
-    }
-
-    if (password !== confirmPassword) {
-      newErrors.confirmPassword = "Las contraseñas no coinciden";
-    }
-
+    const newErrors: FormErrors = {};
+    if (!form.name.trim()) newErrors.name = "El nombre es requerido";
+    if (!form.lastName.trim()) newErrors.lastName = "El apellido es requerido";
+    if (!form.dni.trim()) newErrors.dni = "El DNI es requerido";
+    if (!form.email) newErrors.email = "El email es requerido";
+    else if (!/\S+@\S+\.\S+/.test(form.email)) newErrors.email = "Email inválido";
+    if (!form.password) newErrors.password = "La contraseña es requerida";
+    else if (form.password.length < 6) newErrors.password = "Debe tener ≥ 6 caracteres";
+    if (form.password !== confirmPassword) newErrors.confirmPassword = "Las contraseñas no coinciden";
+    if (!form.phoneNumber.trim()) newErrors.phoneNumber = "El teléfono es requerido";
+    if (!form.country.trim()) newErrors.country = "El país es requerido";
+    if (!form.birthDate.trim()) newErrors.birthDate = "La fecha de nacimiento es requerida";
+    if (!form.licenseNumber.trim()) newErrors.licenseNumber = "El número de licencia es requerido";
+    if (!form.specialty.trim()) newErrors.specialty = "La especialidad es requerida";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (name === "confirmPassword") setConfirmPassword(value);
+    else setForm(prev => ({ ...prev, [name]: value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (validateForm()) {
-      setIsLoading(true);
-
-      try {
-        // Aquí iría la llamada a tu API de registro
-        // Por ahora, simulamos un delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        if (onSubmit) {
-          onSubmit(name, email, password);
-        }
-      } catch (error) {
-        console.error("Error al registrarse:", error);
-      } finally {
-        setIsLoading(false);
-      }
+    if (!validateForm()) return;
+    setIsLoading(true);
+    try {
+      await registerUser(form);
+      onSubmit?.(form);
+    } catch (err: any) {
+      setErrors(prev => ({ ...prev, email: err.message }));
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return {
-    name,
-    setName,
-    email,
-    setEmail,
-    password,
+    form,
     confirmPassword,
-    setConfirmPassword,
-    setPassword,
+    handleChange,
+    handleSubmit,
     errors,
     isLoading,
-    handleSubmit,
   };
 };
 
