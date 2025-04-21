@@ -9,16 +9,12 @@ import MainLayout from "../layouts/MainLayout";
 // import AuthLayout from "../layouts/AuthLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Loader from "../components/ui/Loader";
+import PatientList from "../pages/dashboard/PatientList";
 
 // Pages
 const LoginPage = lazy(() => import("../pages/auth/LoginPage"));
 const RegisterPage = lazy(() => import("../pages/auth/RegisterPage"));
 const DashboardPage = lazy(() => import("../pages/dashboard/DashboardPage"));
-<<<<<<< HEAD
-const UserList = lazy(() => import("../pages/dashboard/UserList"));
-=======
-const PatientList = lazy(() => import("../pages/dashboard/PatientList"));
->>>>>>> 7bebd115c1bbb4542ffb1f36487b78bd15c41753
 const NotFound = lazy(() => import("../components/ui/NotFound"));
 
 const AppRouter = () => {
@@ -32,11 +28,7 @@ const AppRouter = () => {
             {/* Rutas públicas */}
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
             <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
-<<<<<<< HEAD
-            <Route path={ROUTES.USERS} element={<UserList />} />
-=======
             <Route path={ROUTES.USERS} element={<PatientList />} />
->>>>>>> 7bebd115c1bbb4542ffb1f36487b78bd15c41753
             {/* Rutas privadas */}
             <Route element={<PrivateRoute />}>
               <Route
