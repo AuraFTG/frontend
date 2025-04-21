@@ -15,6 +15,7 @@ export const fetchWithOpts = async (
     } else {
       throw new Error(response.statusText);
     }
+
   } catch (error) {
     result = { status: "error", data: error as Error };
   }

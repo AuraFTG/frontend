@@ -8,7 +8,7 @@ export interface User {
 export interface FetchResult {
   status: "ok" | "error";
   data: {
-    results: User[];
+    results: Professional[];
   };
 }
 
@@ -34,3 +34,16 @@ export type LoaderProps = {
   text?: string;
   fullScreen?: boolean;
 };
+
+export interface Professional {
+  id: number;
+  dni: string;
+  name: string;
+  lastName: string;
+  phoneNumber: string;
+  country: string;
+  photoUrl: string;
+  birthDate: string; // o podrías usar Date si manejas objetos Date
+  licenseNumber: string;
+  specialty: string;
+}
