@@ -28,6 +28,9 @@ function Header() {
           <li>
             <Link to="/users">Usuarios</Link>
           </li>
+          <li>
+            <Link to="/schedule">Agenda</Link>
+          </li>
         </ul>
       </nav>
     </header>

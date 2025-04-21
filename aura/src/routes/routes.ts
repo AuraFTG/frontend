@@ -4,6 +4,7 @@ export const ROUTES = {
   REGISTER: "/auth/register",
   DASHBOARD: "/",
   USERS: "/users",
+  SCHEDULE: "/schedule",
   // EMPLOYEES: "/employees",
   // EMPLOYEE_DETAIL: "/employees/:id",
   PAYMENTS: "/payments",

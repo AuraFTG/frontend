@@ -10,6 +10,7 @@ import MainLayout from "../layouts/MainLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Loader from "../components/ui/Loader";
 import PatientList from "../pages/dashboard/PatientList";
+import Schedule from "../pages/Calendar/Schedule";
 
 // Pages
 const LoginPage = lazy(() => import("../pages/auth/LoginPage"));
@@ -29,6 +30,7 @@ const AppRouter = () => {
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
             <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
             <Route path={ROUTES.USERS} element={<PatientList />} />
+            <Route path={ROUTES.SCHEDULE} element={<Schedule />} />
             {/* Rutas privadas */}
             <Route element={<PrivateRoute />}>
               <Route
@@ -42,7 +44,6 @@ const AppRouter = () => {
               </Route>
             </Route>
             {/* Ruta para "not found" */}
-            {/* <Route path="*" element={<Navigate to={ROUTES.HOME} />} /> */}
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

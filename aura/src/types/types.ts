@@ -47,3 +47,11 @@ export interface Professional {
   licenseNumber: string;
   specialty: string;
 }
+
+export interface Appointment {
+  id: string;
+  title: string;
+  start: string | Date;
+  end: string | Date;
+  status: "available" | "booked";
+}
