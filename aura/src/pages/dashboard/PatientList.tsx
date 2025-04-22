@@ -7,10 +7,23 @@ import AddPatientModal from "../../components/ui/AddPatientModal";
 const PatientList = () => {
   const [response, setResponse] = useState<patient[]>(patientsData);
   const [editingPatient, setEditingPatient] = useState<patient | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = response.slice(startIndex, endIndex);
+
+  const totalPages = Math.ceil(response.length / itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   const handleDelete = (id: number) => {
     setResponse((prev) => prev.filter((patient) => patient.id !== id));
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Encuentra el último ID utilizado (por defecto 20 si no hay pacientes)
   const getLastPatientId = () => {
@@ -98,7 +111,7 @@ const PatientList = () => {
         <article>
           {/* {response && JSON.stringify(response)} */}
           {response != null && (
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto my-6">
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                 <thead className="bg-gray-100">
                   <tr>
@@ -110,7 +123,7 @@ const PatientList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {response.map((patient) => (
+                  {currentItems.map((patient) => (
                     <tr key={patient.id} className="hover:bg-gray-50">
                       <td className="py-3 px-4 border-b">
                         <p> {patient.id}</p>
@@ -152,6 +165,23 @@ const PatientList = () => {
             </div>
           )}
         </article>
+
+        {/* Botones de paginación */}
+        <div className="flex justify-center mt-4">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              className={`px-4 py-2 mx-1 rounded cursor-pointer ${
+                currentPage === index + 1
+                  ? "bg-blue-500 text-white font-bold"
+                  : "bg-gray-200"
+              }`}
+              onClick={() => handlePageChange(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
       </article>
     </section>
   );
