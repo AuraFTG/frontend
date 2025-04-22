@@ -1,5 +1,4 @@
 import { createContext, useContext } from "react";
-// import { ToastContext } from "../context/ToastContext";
 
 export type ToastType = "success" | "error" | "info" | "warning";
 
