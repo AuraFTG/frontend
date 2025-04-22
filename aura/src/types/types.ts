@@ -7,9 +7,7 @@ export interface User {
 
 export interface FetchResult {
   status: "ok" | "error";
-  data: {
-    results: Professional[];
-  };
+  data: { results: Professional[]; error?: Error };
 }
 
 export type OnSubmitHandler = (

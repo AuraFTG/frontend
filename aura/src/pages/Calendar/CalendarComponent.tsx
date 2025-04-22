@@ -10,8 +10,6 @@ import Modal from "./Modal";
 export interface Appointment {
   id: string;
   title: string;
-  // start: Date;
-  // end: Date;
   start: string | Date;
   end: string | Date;
   status: "available" | "booked";

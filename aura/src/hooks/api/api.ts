@@ -1,4 +1,3 @@
-
 export interface RegisterPayload {
   email: string;
   password: string;
@@ -8,7 +7,7 @@ export interface RegisterPayload {
   phoneNumber: string;
   country: string;
   photoUrl: string;
-  birthDate: string;      // ISO YYYY‑MM‑DD
+  birthDate: string; // ISO YYYY‑MM‑DD
   licenseNumber: string;
   specialty: string;
 }
@@ -22,22 +21,19 @@ export interface AuthResponse {
 }
 
 // URL base sacada de .env
-const BASE = import.meta.env.VITE_API_URL
+const BASE = import.meta.env.VITE_API_URL;
 
 // Función genérica de fetch que inyecta headers JSON + auth
-async function request<T>(
-  path: string,
-  options: RequestInit = {}
-): Promise<T> {
-  const headers: Record<string,string> = {
-    'Content-Type': 'application/json',
-    ...(options.headers as Record<string,string>),
+async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    ...(options.headers as Record<string, string>),
   };
 
   // Si hay token, lo añadimos
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
+    headers["Authorization"] = `Bearer ${token}`;
   }
 
   const res = await fetch(`${BASE}${path}`, {
@@ -64,8 +60,8 @@ export function registerUser(data: RegisterPayload) {
 }
 
 export function loginUser(data: AuthPayload) {
-  return request<AuthResponse>('/auth/login', {
-    method: 'POST',
+  return request<AuthResponse>("/auth/login", {
+    method: "POST",
     body: JSON.stringify(data),
   });
 }
