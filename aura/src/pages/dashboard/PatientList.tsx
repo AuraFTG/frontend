@@ -3,8 +3,10 @@ import { useState } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 import patientsData from "../../../public/patients.json";
 import AddPatientModal from "../../components/ui/AddPatientModal";
+import { useToast } from "../../hooks/useToast";
 
 const PatientList = () => {
+  const { showToast } = useToast();
   const [response, setResponse] = useState<patient[]>(patientsData);
   const [editingPatient, setEditingPatient] = useState<patient | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,8 +23,13 @@ const PatientList = () => {
     setCurrentPage(page);
   };
 
+  const handleDeleteWarning = (id: number) => {
+    handleDelete(id);
+  };
+
   const handleDelete = (id: number) => {
     setResponse((prev) => prev.filter((patient) => patient.id !== id));
+    showToast("Paciente eliminado éxitosamente", "success");
   };
 
   // Encuentra el último ID utilizado (por defecto 20 si no hay pacientes)
@@ -43,6 +50,7 @@ const PatientList = () => {
         )
       );
       console.log("Paciente editado:", patient);
+      showToast("Paciente actualizado éxitosamente", "success");
     } else {
       // Modo agregar: agrega un nuevo paciente
       const newPatient = {
@@ -51,6 +59,7 @@ const PatientList = () => {
         dni: patient.dni,
       };
       setResponse((prev) => [...prev, newPatient]);
+      showToast("Paciente agregado éxitosamente", "success");
       console.log("Nuevo paciente guardado:", newPatient);
     }
 
@@ -147,7 +156,7 @@ const PatientList = () => {
                       <td className="py-3 px-4 border-b">
                         <button
                           type="button"
-                          onClick={() => handleDelete(patient.id)}
+                          onClick={() => handleDeleteWarning(patient.id)}
                           className="cursor-pointer text-red-500 hover:text-red-700 transition-colors duration-300"
                         >
                           <MdDelete
