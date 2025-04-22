@@ -1,8 +1,7 @@
-// hooks/auth/useLoginForm.ts
 import { useState } from "react";
-import { loginUser, AuthPayload, AuthResponse } from "../api/api";
+import { loginUser /* ya no devuelve token */, AuthPayload } from "../api/api";
 import { OnSubmitHandlerLogin } from "../../types/types";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface LoginErrors {
   email?: string;
@@ -14,19 +13,8 @@ const useLoginForm = (onSubmit?: OnSubmitHandlerLogin) => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<LoginErrors>({});
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  /*************  ✨ Windsurf Command ⭐  *************/
-  /**
-   * Valida el formulario de inicio de sesión.
-   *
-   * - El email es requerido.
-   * - El email debe tener un formato válido.
-   * - La contraseña es requerida.
-   * - La contraseña debe tener al menos 6 caracteres.
-   *
-   * @returns {boolean} `true` si el formulario es válido, `false` en caso contrario.
-   */
-  /*******  d2f3a224-f3ec-4985-ba55-1b8dce97b118  *******/
   const validateForm = (): boolean => {
     const newErrors: LoginErrors = {};
 
@@ -48,16 +36,19 @@ const useLoginForm = (onSubmit?: OnSubmitHandlerLogin) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validateForm()) return;
     setIsLoading(true);
 
     try {
       const payload: AuthPayload = { email, password };
-      const response: AuthResponse = await loginUser(payload);
-      // Guardar token y llamar onSubmit
-      localStorage.setItem("token", response.token);
-      onSubmit?.(response.token);
+      // Ahora loginUser solo devuelve void y el servidor fija la cookie
+      await loginUser(payload);
+
+      // avisamos al padre (por ejemplo para actualizar contexto de usuario)
+      onSubmit?.();
+
+      // redirigimos
+      navigate("/");
     } catch (err: any) {
       setErrors((prev) => ({ ...prev, email: err.message }));
     } finally {

@@ -11,6 +11,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
     handleSubmit,
     errors,
     isLoading,
+    successMessage,
   } = useRegisterForm(onSubmit);
 
   return (
@@ -379,6 +380,19 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
             "Registrarse"
           )}
         </button>
+        {/* Mensaje de éxito */}
+        {successMessage && (
+          <p className="mt-4 text-sm text-green-600 text-center">
+            {successMessage}
+          </p>
+        )}
+
+        {/* Mensaje de error general */}
+        {errors.email && (
+          <p className="mt-4 text-sm text-red-600 text-center">
+            {errors.email}
+          </p>
+        )}
       </form>
     </div>
   );

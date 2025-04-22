@@ -14,6 +14,10 @@ function Header() {
           <p>AURA</p>
         </Link>
       </div>
+
+      <div>
+      </div>
+
       <nav className="text-xl font-semibold">
         <ul className="flex gap-4 justify-between [&>li]:hover:underline">
           <li>
