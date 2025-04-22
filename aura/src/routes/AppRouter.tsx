@@ -29,7 +29,7 @@ const AppRouter = () => {
             {/* Rutas públicas */}
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
             <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
-            <Route path={ROUTES.USERS} element={<PatientList />} />
+            <Route path={ROUTES.PATIENTS} element={<PatientList />} />
             <Route path={ROUTES.SCHEDULE} element={<Schedule />} />
             {/* Rutas privadas */}
             <Route element={<PrivateRoute />}>
