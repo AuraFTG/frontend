@@ -39,7 +39,7 @@ const useRegisterForm = (onSubmit?: OnSubmitHandler) => {
     else if (form.password.length < 6) newErrors.password = "Debe tener ≥ 6 caracteres";
     if (form.password !== confirmPassword) newErrors.confirmPassword = "Las contraseñas no coinciden";
     if (!form.phoneNumber.trim()) newErrors.phoneNumber = "El teléfono es requerido";
-    // else if (!/^\d{9}$/.test(form.phoneNumber)) newErrors.phoneNumber = "Teléfono inválido";
+    // else if (!/^\d{9}$/.test(form.phoneNumber)) newErrors.phoneNumber = "Teléfono inválido"; this
     if (!form.country.trim()) newErrors.country = "El país es requerido";
     if (!form.birthDate.trim()) newErrors.birthDate = "La fecha de nacimiento es requerida";
     else {
