@@ -26,7 +26,7 @@ function Header() {
             <Link to="/auth/register">Registro</Link>
           </li>
           <li>
-            <Link to="/users">Usuarios</Link>
+            <Link to="/patients">Pacientes</Link>
           </li>
           <li>
             <Link to="/schedule">Agenda</Link>

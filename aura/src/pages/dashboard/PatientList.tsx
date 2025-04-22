@@ -1,18 +1,64 @@
 import { useState } from "react";
 // import { fetchWithOpts } from "../../hooks/useFetch";
-import { MdDelete } from "react-icons/md";
+import { MdEdit, MdDelete } from "react-icons/md";
 import patientsData from "../../../public/patients.json";
+import AddPatientModal from "../../components/ui/AddPatientModal";
 
 const PatientList = () => {
   const [response, setResponse] = useState<patient[]>(patientsData);
+  const [editingPatient, setEditingPatient] = useState<patient | null>(null);
   const handleDelete = (id: number) => {
     setResponse((prev) => prev.filter((patient) => patient.id !== id));
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Encuentra el último ID utilizado (por defecto 20 si no hay pacientes)
+  const getLastPatientId = () => {
+    // if (patients.length === 0) return 20;
+    // return Math.max(...patients.map((patient) => patient.id));
+    return 20;
+  };
+
+  const handleSavePatient = (patient: { fullName: string; dni: string }) => {
+    if (editingPatient) {
+      // Modo edición: actualiza el paciente existente
+      setResponse((prev) =>
+        prev.map((p) =>
+          p.id === editingPatient.id
+            ? { ...p, name: patient.fullName, dni: patient.dni }
+            : p
+        )
+      );
+      console.log("Paciente editado:", patient);
+    } else {
+      // Modo agregar: agrega un nuevo paciente
+      const newPatient = {
+        id: getLastPatientId() + 1,
+        name: patient.fullName,
+        dni: patient.dni,
+      };
+      setResponse((prev) => [...prev, newPatient]);
+      console.log("Nuevo paciente guardado:", newPatient);
+    }
+
+    // Cierra el modal y limpia el estado de edición
+    setEditingPatient(null);
+    setIsModalOpen(false);
+  };
+
   interface patient {
     id: number;
     name: string;
     dni: string;
   }
+
+  const handleEdit = (id: number) => {
+    const patientToEdit = response.find((patient) => patient.id === id);
+    if (patientToEdit) {
+      setEditingPatient(patientToEdit);
+      setIsModalOpen(true);
+    }
+  };
 
   // const url = "/patient.json";
   // const [response, setResponse] = useState<patient[] | null>(null);
@@ -31,7 +77,24 @@ const PatientList = () => {
   return (
     <section className="container">
       <article>
-        <h2 className="text-xl mb-4">Lista de pacientes</h2>
+        <header className="flex justify-between items-center mb-4">
+          <h2 className="text-4xl font-semibold">Lista de pacientes</h2>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-blue-400 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md cursor-pointer transition-colors duration-300"
+          >
+            Agregar paciente
+          </button>
+        </header>
+        <AddPatientModal
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+            setEditingPatient(null);
+          }}
+          onSave={handleSavePatient}
+          lastPatientId={getLastPatientId()}
+        />
         <article>
           {/* {response && JSON.stringify(response)} */}
           {response != null && (
@@ -42,7 +105,8 @@ const PatientList = () => {
                     <th className="py-3 px-4 border-b text-left">id</th>
                     <th className="py-3 px-4 border-b text-left">Nombre</th>
                     <th className="py-3 px-4 border-b text-left">DNI</th>
-                    <th className="py-3 px-4 border-b text-left">Acciones</th>
+                    <th className="py-3 px-4 border-b text-left">Editar</th>
+                    <th className="py-3 px-4 border-b text-left">Eliminar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -56,10 +120,29 @@ const PatientList = () => {
                       <td className="py-3 px-4 border-b">
                         <button
                           type="button"
-                          onClick={() => handleDelete(patient.id)}
-                          className="cursor-pointer text-red-500 hover:text-red-700"
+                          onClick={() => handleEdit(patient.id)}
+                          className="cursor-pointer text-gray-400 hover:text-gray-700 transition-colors duration-300"
                         >
-                          <MdDelete style={{ width: "2rem", height: "2rem" , color: "gray" }} />
+                          <MdEdit
+                            style={{
+                              width: "2rem",
+                              height: "2rem",
+                            }}
+                          />
+                        </button>
+                      </td>
+                      <td className="py-3 px-4 border-b">
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(patient.id)}
+                          className="cursor-pointer text-red-500 hover:text-red-700 transition-colors duration-300"
+                        >
+                          <MdDelete
+                            style={{
+                              width: "2rem",
+                              height: "2rem",
+                            }}
+                          />
                         </button>
                       </td>
                     </tr>
