@@ -32,14 +32,14 @@ const useRegisterForm = (onSubmit?: OnSubmitHandler) => {
     if (!form.name.trim()) newErrors.name = "El nombre es requerido";
     if (!form.lastName.trim()) newErrors.lastName = "El apellido es requerido";
     if (!form.dni.trim()) newErrors.dni = "El DNI es requerido";
-    else if (!/^\d{8}[A-Z]$/.test(form.dni)) newErrors.dni = "DNI inválido";
+    // else if (!/^\d{8}[A-Z]$/.test(form.dni)) newErrors.dni = "DNI inválido";
     if (!form.email) newErrors.email = "El email es requerido";
     else if (!/\S+@\S+\.\S+/.test(form.email)) newErrors.email = "Email inválido";
     if (!form.password) newErrors.password = "La contraseña es requerida";
     else if (form.password.length < 6) newErrors.password = "Debe tener ≥ 6 caracteres";
     if (form.password !== confirmPassword) newErrors.confirmPassword = "Las contraseñas no coinciden";
     if (!form.phoneNumber.trim()) newErrors.phoneNumber = "El teléfono es requerido";
-    else if (!/^\d{9}$/.test(form.phoneNumber)) newErrors.phoneNumber = "Teléfono inválido";
+    // else if (!/^\d{9}$/.test(form.phoneNumber)) newErrors.phoneNumber = "Teléfono inválido";
     if (!form.country.trim()) newErrors.country = "El país es requerido";
     if (!form.birthDate.trim()) newErrors.birthDate = "La fecha de nacimiento es requerida";
     else {
