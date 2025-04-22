@@ -4,12 +4,15 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import patientsData from "../../../public/patients.json";
 import AddPatientModal from "../../components/ui/AddPatientModal";
 import { useToast } from "../../hooks/useToast";
+import ConfirmModal from "../../components/ui/ConfirmModal";
 
 const PatientList = () => {
   const { showToast } = useToast();
   const [response, setResponse] = useState<patient[]>(patientsData);
   const [editingPatient, setEditingPatient] = useState<patient | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
+  const [deletePatientId, setDeletePatientId] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -24,12 +27,19 @@ const PatientList = () => {
   };
 
   const handleDeleteWarning = (id: number) => {
-    handleDelete(id);
+    setDeletePatientId(id);
+    setIsWarningModalOpen(true);
   };
 
-  const handleDelete = (id: number) => {
-    setResponse((prev) => prev.filter((patient) => patient.id !== id));
-    showToast("Paciente eliminado éxitosamente", "success");
+  const confirmDelete = () => {
+    if (deletePatientId !== null) {
+      setResponse((prev) =>
+        prev.filter((patient) => patient.id !== deletePatientId)
+      );
+      showToast("Paciente eliminado éxitosamente", "success");
+      setDeletePatientId(null);
+      setIsWarningModalOpen(false);
+    }
   };
 
   // Encuentra el último ID utilizado (por defecto 20 si no hay pacientes)
@@ -116,6 +126,11 @@ const PatientList = () => {
           }}
           onSave={handleSavePatient}
           lastPatientId={getLastPatientId()}
+        />
+        <ConfirmModal
+          isOpen={isWarningModalOpen}
+          onClose={() => setIsWarningModalOpen(false)}
+          onDelete={confirmDelete}
         />
         <article>
           {/* {response && JSON.stringify(response)} */}
