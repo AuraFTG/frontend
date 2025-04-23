@@ -214,6 +214,7 @@ const PatientList = () => {
                             type="button"
                             onClick={() => handleEdit(patient.id)}
                             className="cursor-pointer text-gray-400 hover:text-gray-700 transition-colors duration-300"
+                            title="Editar paciente"
                           >
                             <MdEdit
                               style={{
@@ -228,6 +229,7 @@ const PatientList = () => {
                             type="button"
                             onClick={() => handleDeleteWarning(patient.id)}
                             className="cursor-pointer text-red-500 hover:text-red-700 transition-colors duration-300"
+                            title="Eliminar paciente"
                           >
                             <MdDelete
                               style={{
