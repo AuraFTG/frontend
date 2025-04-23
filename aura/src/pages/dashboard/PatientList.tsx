@@ -5,11 +5,13 @@ import patientsData from "../../../public/patients.json";
 import AddPatientModal from "../../components/ui/AddPatientModal";
 import { useToast } from "../../hooks/useToast";
 import ConfirmModal from "../../components/ui/ConfirmModal";
-import PatientsFilter from "../../components/ui/PatientsFilter";
+import ResultsFilter from "../../components/ui/ResultsFilter";
 
 const PatientList = () => {
   const { showToast } = useToast();
   const [response, setResponse] = useState<patient[]>(patientsData);
+  const [originalResponse, setOriginalResponse] =
+    useState<patient[]>(patientsData);
   const [editingPatient, setEditingPatient] = useState<patient | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
@@ -37,6 +39,9 @@ const PatientList = () => {
       setResponse((prev) =>
         prev.filter((patient) => patient.id !== deletePatientId)
       );
+      setOriginalResponse((prev) =>
+        prev.filter((patient) => patient.id !== deletePatientId)
+      );
       showToast("Paciente eliminado éxitosamente", "success");
       setDeletePatientId(null);
       setIsWarningModalOpen(false);
@@ -60,6 +65,13 @@ const PatientList = () => {
             : p
         )
       );
+      setOriginalResponse((prev) =>
+        prev.map((p) =>
+          p.id === editingPatient.id
+            ? { ...p, name: patient.fullName, dni: patient.dni }
+            : p
+        )
+      );
       console.log("Paciente editado:", patient);
       showToast("Paciente actualizado éxitosamente", "success");
     } else {
@@ -70,6 +82,7 @@ const PatientList = () => {
         dni: patient.dni,
       };
       setResponse((prev) => [...prev, newPatient]);
+      setOriginalResponse((prev) => [...prev, newPatient]);
       showToast("Paciente agregado éxitosamente", "success");
       console.log("Nuevo paciente guardado:", newPatient);
     }
@@ -93,6 +106,36 @@ const PatientList = () => {
     }
   };
 
+  const handleSearch = (query: string) => {
+    if (!query.trim()) {
+      // Si la consulta está vacía, muestra todos los pacientes
+      setResponse(originalResponse);
+      return;
+    }
+
+    // Normaliza la consulta eliminando acentos y convirtiendo a minúsculas
+    const normalizeText = (text: string) =>
+      text
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+
+    // Normaliza la consulta
+    const normalizedQuery = normalizeText(query);
+
+    // Filtra los pacientes por nombre o DNI
+    const responseFiltered = originalResponse.filter((patient) => {
+      const normalizedName = normalizeText(patient.name);
+      const normalizedDni = patient.dni.toLowerCase();
+      return (
+        normalizedName.includes(normalizedQuery) ||
+        normalizedDni.includes(normalizedQuery)
+      );
+    });
+
+    setResponse(responseFiltered);
+  };
+
   // const url = "/patient.json";
   // const [response, setResponse] = useState<patient[] | null>(null);
 
@@ -112,8 +155,16 @@ const PatientList = () => {
       <article>
         <h2 className="text-4xl font-semibold mb-4">Lista de pacientes</h2>
         <header className="flex justify-between items-center mb-4">
-          <PatientsFilter placeholder="Buscar por nombre" />
-          <PatientsFilter placeholder="Buscar por DNI" />
+          <ResultsFilter
+            inputId="name-filter"
+            onSearch={handleSearch}
+            placeholder="Buscar por nombre"
+          />
+          <ResultsFilter
+            inputId="dni-filter"
+            onSearch={handleSearch}
+            placeholder="Buscar por DNI"
+          />
           <button
             onClick={() => setIsModalOpen(true)}
             className="bg-blue-400 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md cursor-pointer transition-colors duration-300"
@@ -150,43 +201,54 @@ const PatientList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentItems.map((patient) => (
-                    <tr key={patient.id} className="hover:bg-gray-50">
-                      <td className="py-3 px-4 border-b">
-                        <p> {patient.id}</p>
-                      </td>
-                      <td className="py-3 px-4 border-b">{patient.name}</td>
-                      <td className="py-3 px-4 border-b">{patient.dni}</td>
-                      <td className="py-3 px-4 border-b">
-                        <button
-                          type="button"
-                          onClick={() => handleEdit(patient.id)}
-                          className="cursor-pointer text-gray-400 hover:text-gray-700 transition-colors duration-300"
-                        >
-                          <MdEdit
-                            style={{
-                              width: "2rem",
-                              height: "2rem",
-                            }}
-                          />
-                        </button>
-                      </td>
-                      <td className="py-3 px-4 border-b">
-                        <button
-                          type="button"
-                          onClick={() => handleDeleteWarning(patient.id)}
-                          className="cursor-pointer text-red-500 hover:text-red-700 transition-colors duration-300"
-                        >
-                          <MdDelete
-                            style={{
-                              width: "2rem",
-                              height: "2rem",
-                            }}
-                          />
-                        </button>
+                  {currentItems.length > 0 ? (
+                    currentItems.map((patient) => (
+                      <tr key={patient.id} className="hover:bg-gray-50">
+                        <td className="py-3 px-4 border-b">
+                          <p> {patient.id}</p>
+                        </td>
+                        <td className="py-3 px-4 border-b">{patient.name}</td>
+                        <td className="py-3 px-4 border-b">{patient.dni}</td>
+                        <td className="py-3 px-4 border-b">
+                          <button
+                            type="button"
+                            onClick={() => handleEdit(patient.id)}
+                            className="cursor-pointer text-gray-400 hover:text-gray-700 transition-colors duration-300"
+                          >
+                            <MdEdit
+                              style={{
+                                width: "2rem",
+                                height: "2rem",
+                              }}
+                            />
+                          </button>
+                        </td>
+                        <td className="py-3 px-4 border-b">
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteWarning(patient.id)}
+                            className="cursor-pointer text-red-500 hover:text-red-700 transition-colors duration-300"
+                          >
+                            <MdDelete
+                              style={{
+                                width: "2rem",
+                                height: "2rem",
+                              }}
+                            />
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan={5}
+                        className="py-4 text-center text-gray-500"
+                      >
+                        No hay resultados para la búsqueda.
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
