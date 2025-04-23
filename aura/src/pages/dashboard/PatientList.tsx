@@ -5,6 +5,7 @@ import patientsData from "../../../public/patients.json";
 import AddPatientModal from "../../components/ui/AddPatientModal";
 import { useToast } from "../../hooks/useToast";
 import ConfirmModal from "../../components/ui/ConfirmModal";
+import PatientsFilter from "../../components/ui/PatientsFilter";
 
 const PatientList = () => {
   const { showToast } = useToast();
@@ -109,8 +110,10 @@ const PatientList = () => {
   return (
     <section className="container">
       <article>
+        <h2 className="text-4xl font-semibold mb-4">Lista de pacientes</h2>
         <header className="flex justify-between items-center mb-4">
-          <h2 className="text-4xl font-semibold">Lista de pacientes</h2>
+          <PatientsFilter placeholder="Buscar por nombre" />
+          <PatientsFilter placeholder="Buscar por DNI" />
           <button
             onClick={() => setIsModalOpen(true)}
             className="bg-blue-400 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md cursor-pointer transition-colors duration-300"
