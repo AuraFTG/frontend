@@ -45,12 +45,15 @@ const useLoginForm = (onSubmit?: OnSubmitHandlerLogin) => {
       await loginUser(payload);
 
       // avisamos al padre (por ejemplo para actualizar contexto de usuario)
-      onSubmit?.();
+      // onSubmit?.();
+      onSubmit?.(email, password);
 
       // redirigimos
       navigate("/");
-    } catch (err: any) {
-      setErrors((prev) => ({ ...prev, email: err.message }));
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setErrors((prev) => ({ ...prev, email: err.message }));
+      }
     } finally {
       setIsLoading(false);
     }

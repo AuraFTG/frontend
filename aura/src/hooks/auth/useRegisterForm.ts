@@ -26,7 +26,6 @@ const useRegisterForm = (onSubmit?: OnSubmitHandler) => {
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     if (!form.name.trim()) newErrors.name = "El nombre es requerido";
@@ -34,22 +33,29 @@ const useRegisterForm = (onSubmit?: OnSubmitHandler) => {
     if (!form.dni.trim()) newErrors.dni = "El DNI es requerido";
     // else if (!/^\d{8}[A-Z]$/.test(form.dni)) newErrors.dni = "DNI inválido";
     if (!form.email) newErrors.email = "El email es requerido";
-    else if (!/\S+@\S+\.\S+/.test(form.email)) newErrors.email = "Email inválido";
+    else if (!/\S+@\S+\.\S+/.test(form.email))
+      newErrors.email = "Email inválido";
     if (!form.password) newErrors.password = "La contraseña es requerida";
-    else if (form.password.length < 6) newErrors.password = "Debe tener ≥ 6 caracteres";
-    if (form.password !== confirmPassword) newErrors.confirmPassword = "Las contraseñas no coinciden";
-    if (!form.phoneNumber.trim()) newErrors.phoneNumber = "El teléfono es requerido";
+    else if (form.password.length < 6)
+      newErrors.password = "Debe tener ≥ 6 caracteres";
+    if (form.password !== confirmPassword)
+      newErrors.confirmPassword = "Las contraseñas no coinciden";
+    if (!form.phoneNumber.trim())
+      newErrors.phoneNumber = "El teléfono es requerido";
     // else if (!/^\d{9}$/.test(form.phoneNumber)) newErrors.phoneNumber = "Teléfono inválido"; this
     if (!form.country.trim()) newErrors.country = "El país es requerido";
-    if (!form.birthDate.trim()) newErrors.birthDate = "La fecha de nacimiento es requerida";
+    if (!form.birthDate.trim())
+      newErrors.birthDate = "La fecha de nacimiento es requerida";
     else {
       const birthDate = new Date(form.birthDate);
       const today = new Date();
       const age = today.getFullYear() - birthDate.getFullYear();
       if (age < 18) newErrors.birthDate = "Debes tener al menos 18 años";
     }
-    if (!form.licenseNumber.trim()) newErrors.licenseNumber = "El número de licencia es requerido";
-    if (!form.specialty.trim()) newErrors.specialty = "La especialidad es requerida";
+    if (!form.licenseNumber.trim())
+      newErrors.licenseNumber = "El número de licencia es requerido";
+    if (!form.specialty.trim())
+      newErrors.specialty = "La especialidad es requerida";
     if (form.photoUrl && !/^https?:\/\/.+\..+/.test(form.photoUrl)) {
       newErrors.photoUrl = "URL inválida";
     }
@@ -60,40 +66,49 @@ const useRegisterForm = (onSubmit?: OnSubmitHandler) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (name === "confirmPassword") setConfirmPassword(value);
-    else setForm(prev => ({ ...prev, [name]: value }));
+    else setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSuccessMessage(null)
+    setSuccessMessage(null);
     if (!validateForm()) return;
     setIsLoading(true);
     try {
       await registerUser(form);
       setSuccessMessage("Usuario creado correctamente");
-      onSubmit?.(form);
-         // Restablecer los valores del formulario
-    setForm({
-      email: "",
-      password: "",
-      dni: "",
-      name: "",
-      lastName: "",
-      phoneNumber: "",
-      country: "",
-      photoUrl: "",
-      birthDate: "",
-      licenseNumber: "",
-      specialty: "",
-    });
-    setConfirmPassword("");
-    } catch (err: any) {
+      //onSubmit?.(form);
+      onSubmit?.(form.name, form.email, form.password);
+      // Restablecer los valores del formulario
+      setForm({
+        email: "",
+        password: "",
+        dni: "",
+        name: "",
+        lastName: "",
+        phoneNumber: "",
+        country: "",
+        photoUrl: "",
+        birthDate: "",
+        licenseNumber: "",
+        specialty: "",
+      });
+      setConfirmPassword("");
+    } catch (err: unknown) {
       // Manejo de errores específicos
-      const errorMessage = err?.response?.data?.message || "Ocurrió un error inesperado";
+      const errorMessage =
+        (err as { response?: { data?: { message?: string } } })?.response?.data
+          ?.message || "Ocurrió un error inesperado";
+
+      // const errorMessage =
+      //   err?.response?.data?.message || "Ocurrió un error inesperado";
       if (errorMessage.includes("email")) {
-        setErrors(prev => ({ ...prev, email: "El email ya está registrado" }));
+        setErrors((prev) => ({
+          ...prev,
+          email: "El email ya está registrado",
+        }));
       } else {
-        setErrors(prev => ({ ...prev, email: errorMessage }));
+        setErrors((prev) => ({ ...prev, email: errorMessage }));
       }
     } finally {
       setIsLoading(false);
