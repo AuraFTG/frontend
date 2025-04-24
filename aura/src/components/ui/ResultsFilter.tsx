@@ -33,7 +33,7 @@ function ResultsFilter({ inputId, placeholder, onSearch }: ResultsFilterProps) {
         placeholder={placeholder}
       />
       <button
-        className="py-1 px-2 text-white bg-blue-400 hover:bg-blue-600 transition-colors duration-300 w-full h-full cursor-pointer"
+        className="min-w-10 py-1 px-2 text-white bg-blue-400 hover:bg-blue-600 transition-colors duration-300 h-full cursor-pointer"
         onClick={() => onSearch(query)}
         title="Buscar"
       >

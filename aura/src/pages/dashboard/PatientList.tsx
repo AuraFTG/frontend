@@ -154,7 +154,7 @@ const PatientList = () => {
     <section className="container">
       <article>
         <h2 className="text-4xl font-semibold mb-4">Lista de pacientes</h2>
-        <header className="flex justify-between items-center mb-4">
+        <header className="flex flex-col gap-4 lg:flex-row justify-between items-center mb-4">
           <ResultsFilter
             inputId="name-filter"
             onSearch={handleSearch}
