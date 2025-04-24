@@ -21,7 +21,6 @@ export interface AuthPayload {
 
 export interface UserProfile {
   id: string;
-  username: string;
   email: string;
   name: string;
   lastName: string;
@@ -76,7 +75,7 @@ export const loginUser = (data: AuthPayload) =>
  * Obtiene un profesional por ID (usa la cookie de sesión automáticamente).
  */
 export const getProfessionalById = (id?: number) => {
-  return request<UserProfile>(`/professionals/${id}`, {
+  return request<UserProfile>(`/professionals/5`, {
     method: "GET",
   });
 };

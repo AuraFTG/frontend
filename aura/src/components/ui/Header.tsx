@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import LogoIcon from "../../assets/aura-icon.avif";
+import Banner from "./Banner";
+import { useAuth } from "../../hooks/auth/AuthContext";
+
 
 function Header() {
-  return (
+  const { isAuthenticated, login, logout } = useAuth(); 
+   return (
+    <>  
+    {isAuthenticated && <Banner />} 
     <header className="flex bg-blue-400 text-white items-center justify-between py-4 px-6">
       <div>
         <Link className="text-lg flex items-center gap-2 font-semibold" to="/">
@@ -13,14 +19,14 @@ function Header() {
           />
           <p>AURA</p>
         </Link>
+       
       </div>
 
-      <div>
-      </div>
 
       <nav className="text-xl font-semibold">
         <ul className="flex gap-4 justify-between [&>li]:hover:underline">
           <li>
+        
             <Link to="/frontend">Home</Link>
           </li>
           <li>
@@ -37,7 +43,7 @@ function Header() {
           </li>
         </ul>
       </nav>
-    </header>
+    </header></>
   );
 }
 

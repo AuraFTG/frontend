@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { getProfessionalById } from "../../hooks/api/api"; // nuevo helper
 
 interface UsernameDisplayProps {
-  username: string;
+name: string;
 }
 
-const UsernameDisplay: React.FC<UsernameDisplayProps> = ({ username }) => (
+const UsernameDisplay: React.FC<UsernameDisplayProps> = ({ name }) => (
   <div className="p-4 bg-gray-100 rounded-lg shadow">
-    <p className="text-lg font-semibold">Hola, {username}!</p>
+    <p className="text-lg font-semibold">Hola, {name}!</p>
   </div>
 );
 
@@ -18,7 +18,7 @@ const Banner: React.FC = () => {
 
   useEffect(() => {
     getProfessionalById()
-      .then((profile) => setUsername(profile.username))
+      .then((profile) => setUsername(profile.name))
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
@@ -27,8 +27,8 @@ const Banner: React.FC = () => {
   if (error) return <p className="p-4 text-red-500">Error: {error}</p>;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-      <UsernameDisplay username={username} />
+    <div className="">
+      <UsernameDisplay name={username} />
     </div>
   );
 };

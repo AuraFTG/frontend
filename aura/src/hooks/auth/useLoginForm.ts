@@ -2,6 +2,7 @@ import { useState } from "react";
 import { loginUser /* ya no devuelve token */, AuthPayload } from "../api/api";
 import { OnSubmitHandlerLogin } from "../../types/types";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth/AuthContext";
 
 interface LoginErrors {
   email?: string;
@@ -14,6 +15,7 @@ const useLoginForm = (onSubmit?: OnSubmitHandlerLogin) => {
   const [errors, setErrors] = useState<LoginErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const {login} = useAuth();
 
   const validateForm = (): boolean => {
     const newErrors: LoginErrors = {};
@@ -43,7 +45,7 @@ const useLoginForm = (onSubmit?: OnSubmitHandlerLogin) => {
       const payload: AuthPayload = { email, password };
       // Ahora loginUser solo devuelve void y el servidor fija la cookie
       await loginUser(payload);
-
+      login(); // actualiza el contexto de autenticación
       // avisamos al padre (por ejemplo para actualizar contexto de usuario)
       // onSubmit?.();
       onSubmit?.(email, password);
