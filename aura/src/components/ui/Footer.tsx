@@ -13,7 +13,9 @@ function Footer() {
         >
           <FaGithub className="text-3xl" />
         </a>
-        <p>Aura copyright © 2025. Todos los derechos reservados.</p>
+        <p className="text-center w-2/3 md:w-auto">
+          Aura copyright © 2025. Todos los derechos reservados.
+        </p>
         <span></span>
       </article>
     </footer>

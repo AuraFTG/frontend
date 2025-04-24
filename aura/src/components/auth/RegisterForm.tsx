@@ -52,6 +52,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
               } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
               placeholder="Juan"
               required
+              autoComplete="name"
             />
             {errors.name && (
               <p className="mt-1 text-sm text-red-600">{errors.name}</p>
@@ -77,6 +78,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
               } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
               placeholder="Pérez"
               required
+              autoComplete="last-name"
             />
             {errors.lastName && (
               <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>
@@ -102,6 +104,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
               } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
               placeholder="12345678A"
               required
+              autoComplete="off"
             />
             {errors.dni && (
               <p className="mt-1 text-sm text-red-600">{errors.dni}</p>
@@ -127,6 +130,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
               } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
               placeholder="correo@ejemplo.com"
               required
+              autoComplete="email"
             />
             {errors.email && (
               <p className="mt-1 text-sm text-red-600">{errors.email}</p>
@@ -152,6 +156,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
               } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
               placeholder="********"
               required
+              autoComplete="password"
             />
             {errors.password && (
               <p className="mt-1 text-sm text-red-600">{errors.password}</p>
@@ -177,6 +182,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
               } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
               placeholder="********"
               required
+              autoComplete="confirm-password"
             />
             {errors.confirmPassword && (
               <p className="mt-1 text-sm text-red-600">
@@ -204,6 +210,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
               } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
               placeholder="123456789"
               required
+              autoComplete="tel"
             />
             {errors.phoneNumber && (
               <p className="mt-1 text-sm text-red-600">{errors.phoneNumber}</p>
@@ -229,6 +236,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
               } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
               placeholder="España"
               required
+              autoComplete="country"
             />
             {errors.country && (
               <p className="mt-1 text-sm text-red-600">{errors.country}</p>
