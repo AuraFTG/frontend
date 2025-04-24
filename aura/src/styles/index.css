@@ -10,6 +10,18 @@
     width: 88% !important;
     margin: 0 auto;
   }
+
+  @media screen and (max-width: 768px) {
+    .container {
+      width: 95% !important; /* Cambia el ancho para pantallas más pequeñas */
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .container {
+      width: 100% !important; /* Ocupa todo el ancho en pantallas muy pequeñas */
+    }
+  }
 }
 
 /* @layer base {
