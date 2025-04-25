@@ -28,11 +28,11 @@ function DashboardPage() {
     <section className="container">
       <article>
         <h2 className="text-xl mb-4">Home Dashboard</h2>
-        <article>
+        <div>
           {/* {response && JSON.stringify(response)} */}
           {response != null && (
             <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+              <table className="w-full bg-white border border-gray-200 rounded-lg">
                 <thead className="bg-gray-100">
                   <tr>
                     <th className="py-3 px-4 border-b text-left">id</th>
@@ -66,7 +66,7 @@ function DashboardPage() {
                       </td>
                       <td className="py-3 px-4 border-b">
                         <button type="button" className="cursor-pointer">
-                          <MdDelete style={{ width: "2rem", height: "2rem" }} />
+                          <MdDelete className="w-6 h-6" />
                         </button>
                       </td>
                     </tr>
@@ -75,7 +75,7 @@ function DashboardPage() {
               </table>
             </div>
           )}
-        </article>
+        </div>
       </article>
     </section>
   );
