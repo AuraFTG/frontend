@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import LogoIcon from "../../assets/aura-icon.avif";
 import Banner from "./Banner";
-import { useAuth } from "../../hooks/auth/AuthContext";
+import { useAuth } from "../../hooks/auth/AuthContext.tsx";
 
 
 function Header() {
-  const { isAuthenticated, login, logout } = useAuth(); 
+  const { isAuthenticated ,logout} = useAuth(); 
    return (
-    <>  
-    {isAuthenticated && <Banner />} 
+    <> 
+        {isAuthenticated  && <Banner/>} 
     <header className="flex bg-blue-400 text-white items-center justify-between py-4 px-6">
       <div>
         <Link className="text-lg flex items-center gap-2 font-semibold" to="/">
@@ -30,7 +30,8 @@ function Header() {
             <Link to="/frontend">Home</Link>
           </li>
           <li>
-            <Link to="/auth/login">Login</Link>
+          {isAuthenticated ? (<Link to="/auth/login" onClick={logout}>desconectar</Link> ) : (
+            <Link to="/auth/login">Login</Link>     )}
           </li>
           <li>
             <Link to="/auth/register">Registro</Link>

@@ -9,9 +9,7 @@ import { AuthProvider } from "./hooks/auth/AuthContext.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
-
     <ToastProvider>
-      {/* <App /> */}
       <AppRouter />
     </ToastProvider>
     </AuthProvider>

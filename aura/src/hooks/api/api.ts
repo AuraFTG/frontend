@@ -20,11 +20,10 @@ export interface AuthPayload {
 }
 
 export interface UserProfile {
-  id: string;
+  id: number;
   email: string;
   name: string;
   lastName: string;
-  // …otros campos de perfil que devuelva tu API
 }
 
 // URL base desde .env
@@ -75,24 +74,12 @@ export const loginUser = (data: AuthPayload) =>
  * Obtiene un profesional por ID (usa la cookie de sesión automáticamente).
  */
 export const getProfessionalById = (id?: number) => {
-  return request<UserProfile>(`/professionals/5`, {
+  return request<UserProfile>(`/professionals/${id}`, {
     method: "GET",
   });
 };
 
-/**
- * Si tu servidor expone un endpoint tipo `/auth/me`, úsalo así:
- */
-export const getCurrentProfessional = () =>
-  request<UserProfile>("/auth/me", {
-    method: "GET",
-  });
 
-/**
- * Nota: si `/auth/me` devuelve 500, puede que no exista en tu servidor.
- * En ese caso sigue usando `getProfessionalById(id)` pasando un ID válido
- * que tengas tras el login (por ejemplo en la respuesta de loginUser).
- */
 
 /**
  * Interfaz para la respuesta paginada de profesionales.
