@@ -44,7 +44,9 @@ function Header() {
       >
         <ul
           className={`flex ${
-            isMenuOpen ? "flex-col justify-center items-center h-full" : ""
+            isMenuOpen
+              ? "flex-col justify-center items-center h-full gap-8"
+              : ""
           } md:flex-row gap-4 justify-between [&>li]:hover:underline`}
         >
           <li onClick={handleMenu}>

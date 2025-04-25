@@ -31,7 +31,7 @@ function Schedule() {
         <h1 className="text-3xl uppercase mb-8">Turnos Disponibles</h1>
         <div className="mb-4">
           <select
-            className="w-60 py-2 px-2 cursor-pointer rounded-sm"
+            className="w-60 py-2 px-2 cursor-pointer rounded-sm border border-neutral-300"
             onChange={handleSelection}
             name="specialty"
             id="specialty"

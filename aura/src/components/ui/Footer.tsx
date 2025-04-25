@@ -16,7 +16,7 @@ function Footer() {
         <p className="text-center w-2/3 md:w-auto">
           Aura copyright © 2025. Todos los derechos reservados.
         </p>
-        <span></span>
+        <span className="w-8"></span>
       </article>
     </footer>
   );
