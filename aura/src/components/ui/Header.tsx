@@ -47,7 +47,7 @@ function Header() {
             isMenuOpen
               ? "flex-col justify-center items-center h-full gap-8"
               : ""
-          } md:flex-row gap-4 justify-between [&>li]:hover:underline`}
+          } md:flex-row md:gap-4 justify-between [&>li]:hover:underline`}
         >
           <li onClick={handleMenu}>
             <Link to="/frontend">Home</Link>
