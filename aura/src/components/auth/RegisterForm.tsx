@@ -78,7 +78,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
               } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
               placeholder="Pérez"
               required
-              autoComplete="last-name"
+              autoComplete="given-name"
             />
             {errors.lastName && (
               <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>
@@ -156,7 +156,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
               } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
               placeholder="********"
               required
-              autoComplete="password"
+              autoComplete="new-password"
             />
             {errors.password && (
               <p className="mt-1 text-sm text-red-600">{errors.password}</p>
@@ -182,7 +182,7 @@ const RegisterForm: FC<RegisterProps> = ({ onSubmit }) => {
               } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
               placeholder="********"
               required
-              autoComplete="confirm-password"
+              autoComplete="new-password"
             />
             {errors.confirmPassword && (
               <p className="mt-1 text-sm text-red-600">
