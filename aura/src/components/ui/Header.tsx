@@ -19,7 +19,6 @@ function Header() {
 
     window.addEventListener("resize", handleResize);
 
-    // Limpia el evento al desmontar el componente
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -41,7 +40,7 @@ function Header() {
       <nav
         className={`${
           isMenuOpen ? "block fixed inset-0 bg-blue-400 z-20" : "hidden"
-        } md:block text-xl font-semibold`}
+        } md:block md:static md:bg-transparent text-xl font-semibold`}
       >
         <ul
           className={`flex ${
